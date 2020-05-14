@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Store</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="regester">regester</string>
+    <string name="emailShouldBe6">"email should be 6 charcter or more "</string>
+    <string name="emailEndsWithGmailCom">email should ends with  @gmail.com</string>
+    <string name="passwordShouldbe6">"password should be 6 character or more "</string>
+    <string name="home">home</string>
+    <string name="profile">profile</string>
+    <string name="cart">cart</string>
+    <string name="category">category</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="offers">offers</string>
+    <string name="brands">brands</string>
+    <string name="dealler">dealer</string>
+    <string name="allCategories">all categories</string>
+    <string name="personalDetailes">personal detailes</string>
+    <string name="userName">user name</string>
+    <string name="mobile">mobile</string>
+    <string name="address">address</string>
+    <string name="signOut">"sign out "</string>
+    <string name="color">color :</string>
+    <string name="buyNow">buy now</string>
+    <string name="addToCart">add to cart</string>
+    <string name="filter">filter</string>
+    <string name="search">search</string>
+    <string name="filterFromLowToHigh">"filter by raiting from low to high "</string>
+    <string name="filterFromHighToLow">filter by raiting from high to low</string>
+    <string name="addedLater">added later</string>
+    <string name="addCategory">add category</string>
+    <string name="update">update</string>
+    <string name="cancel">cancel</string>
+    <string name="save">save</string>
+    <string name="yourLocation">"your currant location "</string>
+    <string name="enterNewName">"enter new name "</string>
+</resources>
