@@ -70,7 +70,9 @@ class SigninFragment : Fragment() {
                         startActivity(intent)
                         activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_FIRST_OPEN,false).apply()
                         activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_USER,true).apply()
-                         } else {
+                        activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putString(Constants.ID,auth.currentUser!!.uid).apply()
+
+                    } else {
                         ppSignIn.visibility=View.GONE
                         Toast.makeText(context, "sign in failed.", Toast.LENGTH_SHORT).show()
                     }

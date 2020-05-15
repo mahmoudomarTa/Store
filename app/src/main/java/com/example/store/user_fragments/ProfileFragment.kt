@@ -32,9 +32,7 @@ class ProfileFragment : Fragment() {
         view.signOutBtn.setOnClickListener {
             context!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
                 .edit().putBoolean(IS_FIRST_OPEN,true).apply()
-            startActivity(
-                Intent(context,
-                    MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+            startActivity(Intent(context,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 
         }
         return view
