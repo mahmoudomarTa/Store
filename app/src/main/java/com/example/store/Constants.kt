@@ -15,7 +15,7 @@ class Constants {
         var SHARED_PREF_NAME = "SHARED_PREF_NAME"
         var IS_FIRST_OPEN="IS_FIRST_OPEN"
         var IS_USER = "IS_USER"
-        fun printToast(context: Context , text:String){
+        fun printToast(context: Context?, text:String){
             Toast.makeText(context,text, Toast.LENGTH_SHORT).show()
         }
         fun getTimeInMILS():Long{

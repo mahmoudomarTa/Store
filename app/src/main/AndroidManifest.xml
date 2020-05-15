@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ProductsActivity"></activity>
+        <activity android:name=".activities.EditAndAddProductActivity"></activity>
+        <activity android:name=".activities.ProductsActivity" />
         <activity android:name=".activities.DealerBrandOffersActivity" />
 
         <meta-data
@@ -20,8 +21,10 @@
 
         <activity android:name=".activities.SecondActivity" />
         <activity android:name=".activities.AdminHomeActivity" />
-        <activity android:name=".activities.UserHomeActivity"></activity>
-        <activity android:name=".activities.RegesterationActivity" />
+        <activity android:name=".activities.UserHomeActivity" >
+
+        </activity>
+        <activity android:name=".registration.RegesterationActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

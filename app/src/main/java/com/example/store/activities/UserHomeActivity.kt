@@ -13,7 +13,7 @@ class UserHomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home)
 
-        var navController = Navigation.findNavController(this,R.id.fragment)
+        var navController = Navigation.findNavController(this,R.id.nav_host_fragment)
         NavigationUI.setupWithNavController(userBottomNavigationView,navController)
 
     }

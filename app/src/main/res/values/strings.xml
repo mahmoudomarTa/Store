@@ -36,4 +36,16 @@
     <string name="save">save</string>
     <string name="yourLocation">"your currant location "</string>
     <string name="enterNewName">"enter new name "</string>
+    <string name="productName">"product name "</string>
+    <string name="descriptin">description</string>
+    <string name="price">"price "</string>
+    <string name="rate">"rate "</string>
+    <string name="discount">discount</string>
+    <string name="longtude">longtude</string>
+    <string name="latetude">latetude</string>
+    <string name="signIn">signIn</string>
+    <string name="signUp">sign up</string>
+    <string name="iDontHaveAccount">"Idont have account "</string>
+    <string name="allreadyHaveAccount">Allready Have Account</string>
+    <string name="mobileShouldBe">mobile should be more than 8 char</string>
 </resources>

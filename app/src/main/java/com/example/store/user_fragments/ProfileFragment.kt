@@ -1,6 +1,7 @@
 package com.example.store.user_fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import com.example.store.Constants
 import com.example.store.Constants.Companion.IS_FIRST_OPEN
 
 import com.example.store.R
+import com.example.store.activities.MainActivity
+import com.example.store.registration.RegesterationActivity
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 /**
@@ -29,6 +32,10 @@ class ProfileFragment : Fragment() {
         view.signOutBtn.setOnClickListener {
             context!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
                 .edit().putBoolean(IS_FIRST_OPEN,true).apply()
+            startActivity(
+                Intent(context,
+                    MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+
         }
         return view
     }

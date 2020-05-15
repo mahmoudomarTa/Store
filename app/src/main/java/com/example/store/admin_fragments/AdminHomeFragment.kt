@@ -1,5 +1,6 @@
 package com.example.store.admin_fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.store.R
+import com.example.store.activities.ProductsActivity
 import com.example.store.adapters.AdminHomeAdapter
 import com.example.store.dialogs_Fragments.UpdateFragment
 import com.example.store.model.Category
@@ -45,6 +47,10 @@ class AdminHomeFragment : Fragment() {
         val adapter= AdminHomeAdapter(context!!,data,object :AdminHomeAdapter.OnCategoryItemClickListener{
             override fun onItemClicked(category: Category) {
                 // open another screen that contains all this category products
+                var intent = Intent(activity,ProductsActivity::class.java)
+                intent.putExtra("id",category.id)
+                intent.putExtra("categoryName",category.name)
+                startActivity(intent)
             }
             override fun onItemLongClicked(category: Category) {
                 UpdateFragment(object : UpdateFragment.OnUpdate{

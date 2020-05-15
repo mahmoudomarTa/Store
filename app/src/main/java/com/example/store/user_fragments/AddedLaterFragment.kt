@@ -29,15 +29,24 @@ class AddedLaterFragment : Fragment() {
         var view =  inflater.inflate(R.layout.fragment_added_later, container, false)
         view.rvAddedLater.layoutManager=GridLayoutManager(context,2)
         var products = ArrayList<Product>()
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,0,ArrayList<String>(),"red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,0,ArrayList<String>(),"red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,0,ArrayList<String>(),"red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,0,ArrayList<String>(),"red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,0,ArrayList<String>(),"red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,0,ArrayList<String>(),"red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,0,ArrayList<String>(),"red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,0,ArrayList<String>(),"red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,0,ArrayList<String>(),"red","",false,1.0,1.0))
+        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+            Constants.getTimeInMILS(),"","red","",false,1.0,1.0))
+        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
 
         view.rvAddedLater.adapter= HomeAdapter(context,products,object : HomeAdapter.OnProductClickListener{
             override fun onItemClicked(id: String) {
