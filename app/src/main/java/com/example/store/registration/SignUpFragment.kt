@@ -2,14 +2,15 @@ package com.example.store.registration
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.IntentCompat
+import androidx.fragment.app.Fragment
 import com.example.store.Constants
-
 import com.example.store.R
 import com.example.store.activities.AdminHomeActivity
 import com.example.store.activities.UserHomeActivity
@@ -17,8 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.fragment_sign_up.view.*
-import kotlinx.android.synthetic.main.fragment_sign_up.view.tvAllreadyHaveAccount
-import kotlinx.android.synthetic.main.fragment_signin.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -43,7 +43,9 @@ class SignUpFragment : Fragment() {
             val password = view .edPasswordSignUp.text.toString()
 
             if (email.equals("admin")&&password.equals("admin")){
-                startActivity(Intent(context, AdminHomeActivity::class.java))
+                var intent = Intent(activity!!,AdminHomeActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
                 activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_FIRST_OPEN,false).apply()
                 activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_USER,false).apply()
                 return@setOnClickListener
@@ -73,7 +75,8 @@ class SignUpFragment : Fragment() {
                             var user = mapOf<String,String>(auth.currentUser!!.uid to "id" ,email to "email",mobile to "mobile",password to "password")
                             firestore.collection("users").add(user!!).addOnSuccessListener {
                                 ppSignUp.visibility=View.GONE
-                                var intent = Intent(context, UserHomeActivity::class.java)
+                                var intent = Intent(activity!!,UserHomeActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
                                 startActivity(intent)
                                 activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_FIRST_OPEN,false).apply()
                                 activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_USER,true).apply()

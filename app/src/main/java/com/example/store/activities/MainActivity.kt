@@ -21,13 +21,18 @@ class MainActivity : AppCompatActivity() {
         var IS_USER =getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE).getBoolean(IS_USER,true)
         Handler().postDelayed(Runnable {
             if (IS_FIRST_OPEN){
-                startActivity(Intent(this,
-                    RegesterationActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                var intent = Intent(this,RegesterationActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
             }else{
                 if(IS_USER){
-                    startActivity(Intent(this,UserHomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                    var intent = Intent(this,UserHomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
                 }else{
-                    startActivity(Intent(this,AdminHomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                    var intent = Intent(this,AdminHomeActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
                 }
             }
         },1500)

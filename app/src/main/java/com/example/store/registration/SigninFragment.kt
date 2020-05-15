@@ -44,7 +44,9 @@ class SigninFragment : Fragment() {
             var password = edPasswordSignIn.text.toString()
 
             if (email.equals("admin")&&password.equals("admin")){
-                startActivity(Intent(context, AdminHomeActivity::class.java))
+                var intent = Intent(activity!!,AdminHomeActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
                 activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_FIRST_OPEN,false).apply()
                 activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_USER,false).apply()
                 return@setOnClickListener
@@ -66,7 +68,9 @@ class SigninFragment : Fragment() {
                 .addOnCompleteListener(activity!!) { task ->
                     if (task.isSuccessful) {
                         ppSignIn.visibility=View.GONE
-                        var intent = Intent(context,UserHomeActivity::class.java)
+
+                        var intent = Intent(activity!!,UserHomeActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         startActivity(intent)
                         activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_FIRST_OPEN,false).apply()
                         activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit().putBoolean(Constants.IS_USER,true).apply()
