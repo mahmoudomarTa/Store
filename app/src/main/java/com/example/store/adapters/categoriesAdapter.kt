@@ -9,7 +9,7 @@ import com.example.store.R
 import com.example.store.model.Category
 import kotlinx.android.synthetic.main.category_item.view.*
 
-class categoriesAdapter(var context: Context?, var categories:ArrayList<Category>): RecyclerView.Adapter<categoriesAdapter.categoriesAdapterViewHolder>() {
+class categoriesAdapter(var context: Context?, var categories:ArrayList<Category>,var onCategoryClicked: OnCategoryClicked): RecyclerView.Adapter<categoriesAdapter.categoriesAdapterViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): categoriesAdapterViewHolder {
@@ -23,10 +23,16 @@ class categoriesAdapter(var context: Context?, var categories:ArrayList<Category
     override fun onBindViewHolder(holder: categoriesAdapterViewHolder, position: Int) {
         holder.tvCategoryName.text=categories[position].name
         //Glide.with(holder.imgCategory).load(categories[position].img).into(holder.imgCategory)
+        holder.itemView.setOnClickListener {
+            onCategoryClicked.onCategoryClicked(categories[position].id)
+        }
     }
 
     class categoriesAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imgCategory = itemView.imgCategory
         var tvCategoryName = itemView.tvCategoryName
+    }
+    interface OnCategoryClicked{
+        fun onCategoryClicked(categoryId:String)
     }
 }

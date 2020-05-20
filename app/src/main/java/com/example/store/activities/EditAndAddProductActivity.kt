@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.example.store.R
+import com.example.store.model.Category
 import com.example.store.model.Product
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_edit_product.*
 
@@ -20,9 +22,8 @@ class EditAndAddProductActivity : AppCompatActivity() {
         db = Firebase.firestore
 
         var category = intent.getStringExtra("categoryName")
-
         if (intent.getStringExtra("id")!=null){
-
+        // TODO : load object from firebase
 
 
         }else{
