@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.store.Constants
 
@@ -27,6 +28,13 @@ class AddedLaterFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var view =  inflater.inflate(R.layout.fragment_added_later, container, false)
+        if (arguments!=null&&arguments!!.getString("id")!=null){
+            //TODO load all products in this category
+        }else{
+
+
+            // consider it as added later fragment and load any thing on it
+        }
         view.rvAddedLater.layoutManager=GridLayoutManager(context,2)
         var products = ArrayList<Product>()
         products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,

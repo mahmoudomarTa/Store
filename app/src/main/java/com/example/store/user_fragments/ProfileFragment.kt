@@ -12,6 +12,7 @@ import com.example.store.Constants.Companion.IS_FIRST_OPEN
 
 import com.example.store.R
 import com.example.store.activities.MainActivity
+import com.example.store.dialogs_Fragments.UpdateFragment
 import com.example.store.registration.RegesterationActivity
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
@@ -26,7 +27,34 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
-
+        view.clUsername.setOnClickListener {
+            UpdateFragment(object :UpdateFragment.OnUpdate{
+                override fun onUpdate(newString: String) {
+                    //TODO update name
+                }
+            }).show(activity!!.supportFragmentManager,"")
+        }
+        view.clEmail.setOnClickListener {
+            UpdateFragment(object :UpdateFragment.OnUpdate{
+                override fun onUpdate(newString: String) {
+                    //TODO update email
+                }
+            }).show(activity!!.supportFragmentManager,"")
+        }
+        view.clMobile.setOnClickListener {
+            UpdateFragment(object :UpdateFragment.OnUpdate{
+                override fun onUpdate(newString: String) {
+                    //TODO update mobile
+                }
+            }).show(activity!!.supportFragmentManager,"")
+        }
+        view.clAddress.setOnClickListener {
+            UpdateFragment(object :UpdateFragment.OnUpdate{
+                override fun onUpdate(newString: String) {
+                    //TODO update address
+                }
+            }).show(activity!!.supportFragmentManager,"")
+        }
 
 
         view.signOutBtn.setOnClickListener {
@@ -35,6 +63,8 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(context,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
 
         }
+
+
         return view
     }
 
