@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.store.R
 import com.example.store.model.Brand
+import com.example.store.model.Product
 import kotlinx.android.synthetic.main.brand_layout.view.*
+import kotlinx.android.synthetic.main.item_product.view.name
 
-class BrandAdapter(var context: Context,var brands:ArrayList<Brand>): RecyclerView.Adapter<BrandAdapter.BrandViewHolder>() {
+class ProductAdapter(var context: Context, var brands: List<Product>) :
+    RecyclerView.Adapter<ProductAdapter.BrandViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrandViewHolder {
-        return BrandViewHolder(LayoutInflater.from(context).inflate(R.layout.brand_layout,parent,false))
+        return BrandViewHolder(LayoutInflater.from(context).inflate(R.layout.item_product, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -20,13 +23,10 @@ class BrandAdapter(var context: Context,var brands:ArrayList<Brand>): RecyclerVi
     }
 
     override fun onBindViewHolder(holder: BrandViewHolder, position: Int) {
-        holder.tvBrandName.text=brands[position].name
-        holder.rbBrand.rating=brands[position].brandRait.toFloat()
+        holder.rbBrand.name.text = brands[position].name.toString()
     }
 
-    class BrandViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
-        var imgBrand = itemView.imgBrand
-        var tvBrandName= itemView.tvBrandName
-        var rbBrand= itemView.rbBrand
+    class BrandViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var rbBrand = itemView.name
     }
 }

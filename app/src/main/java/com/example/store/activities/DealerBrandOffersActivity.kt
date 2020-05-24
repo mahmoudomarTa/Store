@@ -1,13 +1,23 @@
 package com.example.store.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.store.Constants
 import com.example.store.R
+import com.example.store.adapters.BrandAdapter
+import com.example.store.adapters.ProductAdapter
+import com.example.store.adapters.categoriesAdapter
+import com.example.store.adapters.categoriesAdapter.OnCategoryClicked
 import com.example.store.user_fragments.BrandFragment
 import com.example.store.user_fragments.AddedLaterFragment
 import com.example.store.user_fragments.OffersFragment
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObjects
+import kotlinx.android.synthetic.main.activity_dealer_brand_offers.rv
+import kotlinx.android.synthetic.main.fragment_category.view.rvCategory
 
 class DealerBrandOffersActivity : AppCompatActivity() {
 
@@ -15,29 +25,16 @@ class DealerBrandOffersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dealer_brand_offers)
 
-        if (intent!=null){
-            if(intent.getStringExtra(Constants.DBO).equals(Constants.DEALER)){
-                if (intent.getStringExtra("id")!=null) {
-                    var bundle = Bundle()
-                    bundle.putString("id", intent.getStringExtra("id"))
-                    var addedLaterFragment = AddedLaterFragment()
-                    addedLaterFragment.arguments=bundle
-                    supportFragmentManager.beginTransaction().add(R.id.DealerBrandOffersContainer,addedLaterFragment).commit()
-                }else {
-                    supportFragmentManager.beginTransaction()
-                        .add(R.id.DealerBrandOffersContainer, AddedLaterFragment()).commit()
-                }
-                }else if(intent.getStringExtra(Constants.DBO).equals(Constants.OFFERS)){
-                supportFragmentManager.beginTransaction().add(R.id.DealerBrandOffersContainer,OffersFragment()).commit()
-            }else if(intent.getStringExtra(Constants.DBO).equals(Constants.BRAND)){
-                supportFragmentManager.beginTransaction().add(R.id.DealerBrandOffersContainer,BrandFragment()).commit()
-            }
+        if (intent.getStringExtra("categoryId") != null) {
+                val categoryId = intent.getStringExtra("categoryId")
+            FirebaseFirestore.getInstance().collection("categories/${categoryId}/products").addSnapshotListener { value, e ->
+                var categoriesAdapter = ProductAdapter(this@DealerBrandOffersActivity, value!!.toObjects())
+                rv.adapter = categoriesAdapter
+                rv.layoutManager = GridLayoutManager(this@DealerBrandOffersActivity, 3)
 
+            }
+        } else {
 
         }
-
-
-
-
     }
 }

@@ -9,7 +9,7 @@ import com.example.store.R
 import com.example.store.model.Category
 import kotlinx.android.synthetic.main.category_item.view.*
 
-class categoriesAdapter(var context: Context?, var categories:ArrayList<Category>,var onCategoryClicked: OnCategoryClicked): RecyclerView.Adapter<categoriesAdapter.categoriesAdapterViewHolder>() {
+class categoriesAdapter(var context: Context?, var categories:List<Category>,var onCategoryClicked: OnCategoryClicked): RecyclerView.Adapter<categoriesAdapter.categoriesAdapterViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): categoriesAdapterViewHolder {
