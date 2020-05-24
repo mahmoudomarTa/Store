@@ -9,7 +9,7 @@ import com.example.store.R
 import com.example.store.model.Category
 import kotlinx.android.synthetic.main.category_item_admin.view.*
 
-class AdminHomeAdapter(var context: Context,var data:ArrayList<Category>,var onCategoryItemClickListener: OnCategoryItemClickListener):RecyclerView.Adapter<AdminHomeAdapter.AdminHomeViewHolder>() {
+class AdminHomeAdapter(var context: Context,var data:List<Category>,var onCategoryItemClickListener: OnCategoryItemClickListener):RecyclerView.Adapter<AdminHomeAdapter.AdminHomeViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminHomeViewHolder {
