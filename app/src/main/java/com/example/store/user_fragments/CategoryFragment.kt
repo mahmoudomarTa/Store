@@ -24,22 +24,7 @@ class CategoryFragment : Fragment() {
 
         var categories = ArrayList<Category>()
 
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-        categories.add(Category("hello","hello",""))
-
-
-        //TODO get all categories from firebase
-
-
+        categories.add(Category("hello","hello"))
 
 
         var categoriesAdapter = categoriesAdapter(context,categories,object :categoriesAdapter.OnCategoryClicked{

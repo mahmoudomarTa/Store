@@ -23,7 +23,7 @@ class TopRatedAdapter(var context: Context?, var data:ArrayList<Product>):Recycl
     override fun onBindViewHolder(holder: TopRatedViewHolder, position: Int) {
         holder.tv_Item_top_rated.text=data[position].name
         holder.tv_rate.text=data[position].rate.toString()
-        holder.rbTop.rating=data[position].rate.toFloat()
+        holder.rbTop.rating=data[position].rate!!.toFloat()
 
     }
 

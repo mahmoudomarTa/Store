@@ -26,7 +26,7 @@ class OffersAdapter(
         holder.tvDiscount.text=producs[position].discount.toString()
         holder.tvOfferName.text=producs[position].name
         holder.itemView.setOnClickListener {
-            onOfferClickListener.onOfferClicked(producs[position].id)
+            onOfferClickListener.onOfferClicked(producs[position].id!!)
         }
     }
 

@@ -10,7 +10,7 @@ import com.example.store.model.Product
 import kotlinx.android.synthetic.main.product_item_layout.view.*
 
 
-class AdminProductsAdapter(var context: Context,var data:ArrayList<Product>,var onProductClickListener: OnProductClickListener):RecyclerView.Adapter<AdminProductsAdapter.AdminProductsViewHolder>() {
+class AdminProductsAdapter(var context: Context,var data:List<Product>,var onProductClickListener: OnProductClickListener):RecyclerView.Adapter<AdminProductsAdapter.AdminProductsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminProductsViewHolder {
         return AdminProductsViewHolder(LayoutInflater.from(context).inflate(R.layout.product_item_layout,parent,false))
     }

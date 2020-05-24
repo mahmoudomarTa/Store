@@ -23,6 +23,7 @@ import com.example.store.model.Category
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
+import java.util.Random
 
 /**
  * A simple [Fragment] subclass.
@@ -40,59 +41,59 @@ class AdminHomeFragment : Fragment() {
         }
         // TODO : load data and make peogress bar visibility gone
 
-        FirebaseFirestore.getInstance().collection("categoriess").get()
-            .addOnSuccessListener {
-                val adapter = AdminHomeAdapter(
-                    context!!,
-                    it.toObjects(),
-                    object : AdminHomeAdapter.OnCategoryItemClickListener {
-                        override fun onItemClicked(category: Category) {
-                            // open another screen that contains all this category products
-                            var intent = Intent(activity, ProductsActivity::class.java)
-                            intent.putExtra("id", category.id)
-                            intent.putExtra("categoryName", category.name)
-                            startActivity(intent)
+        FirebaseFirestore.getInstance().collection("categories").addSnapshotListener { value, e ->
+            val adapter = AdminHomeAdapter(
+                context!!,
+                value!!.toObjects(),
+                object : AdminHomeAdapter.OnCategoryItemClickListener {
+                    override fun onItemClicked(category: Category) {
+                        // open another screen that contains all this category products
+                        var intent = Intent(activity, ProductsActivity::class.java)
+                        intent.putExtra("id", category.id)
+                        intent.putExtra("categoryName", category.name)
+                        startActivity(intent)
+                    }
+
+                    override fun onItemLongClicked(category: Category) {
+                        val alert = AlertDialog.Builder(context!!)
+
+                        val edittext = EditText(context!!)
+                        edittext.setText(category.name)
+                        edittext.maxLines = 1
+
+                        val layout = FrameLayout(context!!)
+
+                        //set padding in parent layout
+                        layout.setPaddingRelative(45, 15, 45, 0)
+
+                        alert.setTitle("Add New Category")
+
+                        layout.addView(edittext)
+
+                        alert.setView(layout)
+
+                        alert.setPositiveButton("Add") { _, _ ->
+                            category.name = edittext.text.toString()
+                            FirebaseFirestore.getInstance().collection("categories").document(category.id)
+                                .set(category)
+
                         }
+                        alert.setNegativeButton(
+                            "Cancel",
+                            DialogInterface.OnClickListener { dialog, which ->
+                                dialog.dismiss()
 
-                        override fun onItemLongClicked(category: Category) {
-                            val alert = AlertDialog.Builder(context!!)
+                            })
 
-                            val edittext = EditText(context!!)
-                            edittext.setText(category.name)
-                            edittext.maxLines = 1
+                        alert.show()
+                    }
 
-                            val layout = FrameLayout(context!!)
+                    override fun onDeleteImgClicked(category: Category) {
+                    }
+                })
+            rv_admin_home.adapter = adapter
 
-                            //set padding in parent layout
-                            layout.setPaddingRelative(45, 15, 45, 0)
-
-                            alert.setTitle("Add New Category")
-
-                            layout.addView(edittext)
-
-                            alert.setView(layout)
-
-                            alert.setPositiveButton("Add") { _, _ ->
-                                category.name = edittext.text.toString()
-                                FirebaseFirestore.getInstance().collection("categoriess").document(category.id).set(category)
-
-                            }
-                            alert.setNegativeButton(
-                                "Cancel",
-                                DialogInterface.OnClickListener { dialog, which ->
-                                    dialog.dismiss()
-
-                                })
-
-                            alert.show()
-                        }
-
-                        override fun onDeleteImgClicked(category: Category) {
-                        }
-                    })
-                rv_admin_home.adapter = adapter
-
-            }
+        }
 
 
 
@@ -116,8 +117,9 @@ class AdminHomeFragment : Fragment() {
             alert.setView(layout)
 
             alert.setPositiveButton("Add") { _, _ ->
-                FirebaseFirestore.getInstance().collection("categoriess")
-                    .add(Category("123123", edittext.text.toString(), "asd"))
+                val categoryId = (0..10000).random().toString()
+                FirebaseFirestore.getInstance().collection("categories").document(categoryId)
+                    .set(Category(categoryId, edittext.text.toString()))
 
             }
             alert.setNegativeButton(

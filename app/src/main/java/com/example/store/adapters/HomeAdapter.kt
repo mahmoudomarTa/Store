@@ -24,7 +24,7 @@ class HomeAdapter(var context: Context?, var products:ArrayList<Product>,var onP
         holder.tvPriceInHome.text=products[position].name
         holder.tvRate.text=products[position].rate.toString()
         holder.itemView.setOnClickListener {
-            onProductClickListener.onItemClicked(products[position].id)
+            onProductClickListener.onItemClicked(products[position].id!!)
         }
         //Glide.with(holder.imgItemInHome).load(products[position].photos[0]).into(holder.imgItemInHome)
     }

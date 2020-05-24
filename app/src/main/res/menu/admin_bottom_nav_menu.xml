@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/adminHomeFragment" android:title="home" android:icon="@drawable/ic_home"/>
-    <item android:id="@+id/salesFragment" android:title="sales" android:icon="@drawable/ic_rate"/>
-    <item android:id="@+id/topRatedFragment" android:title="top rated" android:icon="@drawable/ic_star"/>
+    <item
+        android:id="@+id/adminHomeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="Categories" />
+    <item
+        android:id="@+id/salesFragment"
+        android:icon="@drawable/ic_rate"
+        android:title="sales" />
+    <item
+        android:id="@+id/topRatedFragment"
+        android:icon="@drawable/ic_star"
+        android:title="top rated" />
 </menu>

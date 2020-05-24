@@ -31,14 +31,14 @@ class CartAdapter(
             var count = holder.tvCount.text.toString().toInt()+1
             holder.tvCount.text="$count"
             notifyDataSetChanged()
-            onCountChange!!.onPlusClicked(products[position].id,count)
+            onCountChange!!.onPlusClicked(products[position].id!!,count)
         }
         holder.imgMinus.setOnClickListener {
             notifyDataSetChanged()
 
             var count = holder.tvCount.text.toString().toInt()-1
             holder.tvCount.text="$count"
-            onCountChange!!.onMinusClicked(products[position].id,count)
+            onCountChange!!.onMinusClicked(products[position].id!!,count)
         }
         holder.itemView.setOnLongClickListener {
             onCountChange!!.onItemLongClicked(position)
