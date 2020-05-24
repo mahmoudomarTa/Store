@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.example.store.R
 import com.example.store.model.Category
 import com.example.store.model.Product
@@ -32,6 +33,21 @@ class EditAndAddProductActivity : AppCompatActivity() {
                     edRate.setText(product.rate.toString())
                     edLong.setText(product.long.toString())
                     edLat.setText(product.lat.toString())
+                    btnSaveProduct.setOnClickListener {
+                        pbEditShow.visibility = View.VISIBLE
+                        product.name = edProductName.text.toString()
+                        product.description = edDescription.text.toString()
+                        product.price = edPrice.text.toString()
+                        product.rate = edRate.text.toString()
+                        product.long = edLong.text.toString().toDouble()
+                        product.lat = edLat.text.toString().toDouble()
+
+                        FirebaseFirestore.getInstance().document("${product.category}/products/${product.id}").set(product).addOnSuccessListener {
+                            Log.d("ttt", "cool")
+                        }
+
+                    }
+
                 }
         } else {
             val categoryRef = intent.getStringExtra("categoryRef")
@@ -45,10 +61,10 @@ class EditAndAddProductActivity : AppCompatActivity() {
                 var long = edLong.text.toString().toDouble()
                 var lat = edLat.text.toString().toDouble()
 
-                var product = Product(id, name, description, price, rate, "www.google.com/logo", categoryRef, lat, long)
+                var product =
+                    Product(id, name, description, price, rate, "www.google.com/logo", categoryRef, lat, long)
 
                 FirebaseFirestore.getInstance().collection("$categoryRef/products").document(product.id).set(product)
-
 
             }
         }
