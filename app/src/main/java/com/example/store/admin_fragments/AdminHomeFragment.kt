@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.text.set
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,11 +55,36 @@ class AdminHomeFragment : Fragment() {
                         }
 
                         override fun onItemLongClicked(category: Category) {
-                            UpdateFragment(object : UpdateFragment.OnUpdate {
-                                override fun onUpdate(newString: String) {
-                                    Toast.makeText(context, "$newString", Toast.LENGTH_LONG).show()
-                                }
-                            }).show(activity!!.supportFragmentManager, null)
+                            val alert = AlertDialog.Builder(context!!)
+
+                            val edittext = EditText(context!!)
+                            edittext.setText(category.name)
+                            edittext.maxLines = 1
+
+                            val layout = FrameLayout(context!!)
+
+                            //set padding in parent layout
+                            layout.setPaddingRelative(45, 15, 45, 0)
+
+                            alert.setTitle("Add New Category")
+
+                            layout.addView(edittext)
+
+                            alert.setView(layout)
+
+                            alert.setPositiveButton("Add") { _, _ ->
+                                category.name = edittext.text.toString()
+                                FirebaseFirestore.getInstance().collection("categoriess").document(category.id).set(category)
+
+                            }
+                            alert.setNegativeButton(
+                                "Cancel",
+                                DialogInterface.OnClickListener { dialog, which ->
+                                    dialog.dismiss()
+
+                                })
+
+                            alert.show()
                         }
 
                         override fun onDeleteImgClicked(category: Category) {
@@ -83,19 +109,22 @@ class AdminHomeFragment : Fragment() {
             //set padding in parent layout
             layout.setPaddingRelative(45, 15, 45, 0)
 
-            alert.setTitle("title")
+            alert.setTitle("Add New Category")
 
             layout.addView(edittext)
 
             alert.setView(layout)
 
-            alert.setPositiveButton(getString(R.string.default_web_client_id)) { _, _ ->
+            alert.setPositiveButton("Add") { _, _ ->
+                FirebaseFirestore.getInstance().collection("categoriess")
+                    .add(Category("123123", edittext.text.toString(), "asd"))
 
             }
             alert.setNegativeButton(
-                getString(R.string.gcm_defaultSenderId),
+                "Cancel",
                 DialogInterface.OnClickListener { dialog, which ->
                     dialog.dismiss()
+
                 })
 
             alert.show()

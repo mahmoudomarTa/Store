@@ -1,3 +1,6 @@
 package com.example.store.model
 
-data class Category(var id:String = "",var name:String = "" , var img:String = "")
+data class Category(var id: String = "", var name: String = "", var img: String = "")
+{
+    var names = ""
+}

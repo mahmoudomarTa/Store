@@ -9,7 +9,7 @@ import com.example.store.R
 import com.example.store.model.Sale
 import kotlinx.android.synthetic.main.sale_item_layout.view.*
 
-class SalesAdapter(var context: Context?, var data:ArrayList<Sale>):RecyclerView.Adapter<SalesAdapter.SalesViewHolder>() {
+class SalesAdapter(var context: Context?, var data:List<Sale>):RecyclerView.Adapter<SalesAdapter.SalesViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesViewHolder {
@@ -21,8 +21,8 @@ class SalesAdapter(var context: Context?, var data:ArrayList<Sale>):RecyclerView
     }
 
     override fun onBindViewHolder(holder: SalesViewHolder, position: Int) {
-        holder.tvCustomerName.text=data[position].customerName
-        holder.tv_product_sale_name.text=data[position].name
+        holder.tvCustomerName.text=data[position].buyerEmail
+        holder.tv_product_sale_name.text=data[position].buyerEmail
     }
     class SalesViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         var tv_product_sale_name = itemView.tv_product_sale_name

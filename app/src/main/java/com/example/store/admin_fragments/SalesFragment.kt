@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.store.R
 import com.example.store.adapters.SalesAdapter
 import com.example.store.model.Sale
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.android.synthetic.main.fragment_sales.view.*
 
 /**
@@ -23,19 +25,19 @@ class SalesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var view =  inflater.inflate(R.layout.fragment_sales, container, false)
-        view.rvSales.layoutManager=LinearLayoutManager(context)
-        var data = ArrayList<Sale>()
-        data.add(Sale("","choklet","mahmoud"))
-        data.add(Sale("","choklet","mahmoud"))
-        data.add(Sale("","choklet","mahmoud"))
-        data.add(Sale("","choklet","mahmoud"))
-        data.add(Sale("","choklet","mahmoud"))
-        data.add(Sale("","choklet","mahmoud"))
 
-        var adapter = SalesAdapter(context,data)
-        view.rvSales.adapter=adapter
+        FirebaseFirestore.getInstance().collection("sales").get()
+            .addOnSuccessListener {
+                // Inflate the layout for this fragment
+                view.rvSales.layoutManager=LinearLayoutManager(context)
+                var adapter = SalesAdapter(context,it.toObjects())
+                view.rvSales.adapter=adapter
+
+            }
 
         return view
     }
 
 }
+
+

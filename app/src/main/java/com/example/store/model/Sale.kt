@@ -1,5 +1,4 @@
 package com.example.store.model
 
-class Sale(var id:String ,var name:String , var customerName:String)
-{
+class Sale(var buyerEmail: String= "", var buyerName: String= "", var itemName: String = "") {
 }
