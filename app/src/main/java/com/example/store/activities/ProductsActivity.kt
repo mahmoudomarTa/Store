@@ -27,7 +27,6 @@ class ProductsActivity : AppCompatActivity() {
 
         if (intent.getStringExtra("id") != null) {
             var categoryId = intent.getStringExtra("id")
-
             FirebaseFirestore.getInstance().collection("categories/$categoryId/products")
                 .addSnapshotListener { value, e ->
                     rv_admin_products.layoutManager = LinearLayoutManager(this)
@@ -57,12 +56,12 @@ class ProductsActivity : AppCompatActivity() {
                     rv_admin_products.adapter = adapter
 
                 }
-        }
+            btnAddproduct.setOnClickListener {
+                val i = Intent(applicationContext, EditAndAddProductActivity::class.java)
+                i.putExtra("categoryRef", "categories/$categoryId")
 
-        btnAddproduct.setOnClickListener {
-            val i = Intent(applicationContext, EditAndAddProductActivity::class.java)
-            i.putExtra("categoryName", intent.getStringExtra("categoryName"))
-            startActivity(i)
+                startActivity(i)
+            }
         }
     }
 }

@@ -27,24 +27,24 @@ class OffersFragment : Fragment() {
         view.rvOffers.layoutManager=LinearLayoutManager(context)
 
         var products = ArrayList<Product>()
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-            Constants.getTimeInMILS(),"","red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+//            Constants.getTimeInMILS(),"","red","",false,1.0,1.0))
+//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
+//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
 
 
         var offersAdapter=OffersAdapter(context,products,object:OffersAdapter.OnOfferClickListener{

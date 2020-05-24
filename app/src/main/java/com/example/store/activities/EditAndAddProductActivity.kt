@@ -21,51 +21,34 @@ class EditAndAddProductActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_product)
         db = Firebase.firestore
 
-        var category = intent.getStringExtra("categoryName")
-        if (intent.getStringExtra("id") != null) {
+        if (intent.getStringExtra("productRef") != null) {
             val productRef = intent.getStringExtra("productRef")
             FirebaseFirestore.getInstance().document(productRef)
                 .addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
                     val product = documentSnapshot!!.toObject<Product>()
                     edProductName.setText(product!!.name)
+                    edDescription.setText(product.description)
+                    edPrice.setText(product.price.toString())
+                    edRate.setText(product.rate.toString())
+                    edLong.setText(product.long.toString())
+                    edLat.setText(product.lat.toString())
                 }
         } else {
+            val categoryRef = intent.getStringExtra("categoryRef")
             btnSaveProduct.setOnClickListener {
                 pbEditShow.visibility = View.VISIBLE
+                var id = "P" + (0..100000).random()
                 var name = edProductName.text.toString()
                 var description = edDescription.text.toString()
-                var price = edPrice.text.toString().toDouble()
-                var rate = edRate.text.toString().toDouble()
-                var discount = edDiscount.text.toString().toDouble()
+                var price = edPrice.text.toString()
+                var rate = edRate.text.toString()
                 var long = edLong.text.toString().toDouble()
                 var lat = edLat.text.toString().toDouble()
 
-                var product = Product(
-                    System.currentTimeMillis().toString(),
-                    name,
-                    description,
-                    price,
-                    rate,
-                    discount,
-                    System.currentTimeMillis(),
-                    "",
-                    "",
-                    category!!,
-                    false,
-                    lat,
-                    long
-                )
-                FirebaseFirestore.getInstance().collection("categories").document(product.category!!)
-                    .collection("products")
-                    .add(product)
-                    .addOnSuccessListener { documentReference ->
-                        pbEditShow.visibility = View.GONE
-                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                    }
-                    .addOnFailureListener { e ->
-                        pbEditShow.visibility = View.GONE
-                        Log.w(TAG, "Error adding document", e)
-                    }
+                var product = Product(id, name, description, price, rate, "www.google.com/logo", categoryRef, lat, long)
+
+                FirebaseFirestore.getInstance().collection("$categoryRef/products").document(product.id).set(product)
+
 
             }
         }

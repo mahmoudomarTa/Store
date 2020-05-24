@@ -23,7 +23,6 @@ class OffersAdapter(
     }
 
     override fun onBindViewHolder(holder: OffersViewHolder, position: Int) {
-        holder.tvDiscount.text=producs[position].discount.toString()
         holder.tvOfferName.text=producs[position].name
         holder.itemView.setOnClickListener {
             onOfferClickListener.onOfferClicked(producs[position].id!!)
@@ -31,8 +30,6 @@ class OffersAdapter(
     }
 
     class OffersViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
-        var tvDiscount = itemView.tvDiscount
-        var imgOffer = itemView.imgOffer
         var tvOfferName = itemView.tvOfferName
     }
 

@@ -117,7 +117,7 @@ class AdminHomeFragment : Fragment() {
             alert.setView(layout)
 
             alert.setPositiveButton("Add") { _, _ ->
-                val categoryId = (0..10000).random().toString()
+                val categoryId = (0..1000).random().toString()
                 FirebaseFirestore.getInstance().collection("categories").document(categoryId)
                     .set(Category(categoryId, edittext.text.toString()))
 
