@@ -34,7 +34,6 @@ class EditAndAddProductActivity : AppCompatActivity() {
                     edLong.setText(product.long.toString())
                     edLat.setText(product.lat.toString())
                     btnSaveProduct.setOnClickListener {
-                        pbEditShow.visibility = View.VISIBLE
                         product.name = edProductName.text.toString()
                         product.description = edDescription.text.toString()
                         product.price = edPrice.text.toString()
@@ -52,7 +51,6 @@ class EditAndAddProductActivity : AppCompatActivity() {
         } else {
             val categoryRef = intent.getStringExtra("categoryRef")
             btnSaveProduct.setOnClickListener {
-                pbEditShow.visibility = View.VISIBLE
                 var id = "P" + (0..100000).random()
                 var name = edProductName.text.toString()
                 var description = edDescription.text.toString()
