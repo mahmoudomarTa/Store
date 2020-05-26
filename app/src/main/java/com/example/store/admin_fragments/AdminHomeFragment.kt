@@ -23,6 +23,7 @@ import com.example.store.model.Category
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
+import kotlinx.android.synthetic.main.category_item_admin.imgEdit
 import java.util.Random
 
 /**
@@ -66,13 +67,13 @@ class AdminHomeFragment : Fragment() {
                         //set padding in parent layout
                         layout.setPaddingRelative(45, 15, 45, 0)
 
-                        alert.setTitle("Add New Category")
+                        alert.setTitle("Edit Category")
 
                         layout.addView(edittext)
 
                         alert.setView(layout)
 
-                        alert.setPositiveButton("Add") { _, _ ->
+                        alert.setPositiveButton("Save") { _, _ ->
                             category.name = edittext.text.toString()
                             FirebaseFirestore.getInstance().collection("categories").document(category.id)
                                 .set(category)
@@ -93,6 +94,8 @@ class AdminHomeFragment : Fragment() {
                     }
                 })
             rv_admin_home.adapter = adapter
+
+
 
         }
 
