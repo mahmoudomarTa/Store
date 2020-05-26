@@ -110,7 +110,7 @@
             android:layout_marginBottom="16dp"
             android:layout_weight="1.0"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/addToCartBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rvColors">
@@ -124,7 +124,7 @@
 
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addToCartBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/addToCart"

@@ -9,7 +9,7 @@ import com.example.store.R
 import com.example.store.model.Product
 import kotlinx.android.synthetic.main.item_in_home_rv.view.*
 
-class HomeAdapter(var context: Context?, var products:ArrayList<Product>,var onProductClickListener: OnProductClickListener): RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
+class HomeAdapter(var context: Context?, var products:List<Product>,var onProductClickListener: OnProductClickListener): RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapterViewHolder {
