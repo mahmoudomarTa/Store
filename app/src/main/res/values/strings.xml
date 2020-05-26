@@ -8,7 +8,7 @@
     <string name="passwordShouldbe6">"password should be 6 character or more "</string>
     <string name="home">home</string>
     <string name="profile">profile</string>
-    <string name="cart">cart</string>
+    <string name="cart">purchased products</string>
     <string name="category">category</string>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -26,11 +26,10 @@ class SalesFragment : Fragment() {
         // Inflate the layout for this fragment
         var view =  inflater.inflate(R.layout.fragment_sales, container, false)
 
-        FirebaseFirestore.getInstance().collection("sales").get()
-            .addOnSuccessListener {
+        FirebaseFirestore.getInstance().collection("sales").addSnapshotListener(){ values , e ->
                 // Inflate the layout for this fragment
                 view.rvSales.layoutManager=LinearLayoutManager(context)
-                var adapter = SalesAdapter(context,it.toObjects())
+                var adapter = SalesAdapter(context,values!!.toObjects())
                 view.rvSales.adapter=adapter
 
             }

@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.store.R
 import com.example.store.model.Product
+import com.example.store.model.Sale
 import kotlinx.android.synthetic.main.item_in_cart_layout.view.*
 
 
 class CartAdapter(
-    var context: Context?, var products:ArrayList<Product>,
+    var context: Context?, var products:ArrayList<Sale>,
     var onCountChange: OnCountChange?
 ): RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
@@ -25,20 +26,20 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-        holder.tvItemName.text=products[position].name
-        holder.tvPrice.text="${products[position].price}"
+        holder.tvItemName.text=products[position].ProductName
+        holder.tvPrice.text="${products[position].username}"
         holder.imgPlus.setOnClickListener {
             var count = holder.tvCount.text.toString().toInt()+1
             holder.tvCount.text="$count"
             notifyDataSetChanged()
-            onCountChange!!.onPlusClicked(products[position].id!!,count)
+            onCountChange!!.onPlusClicked(products[position].productRef,count)
         }
         holder.imgMinus.setOnClickListener {
             notifyDataSetChanged()
 
             var count = holder.tvCount.text.toString().toInt()-1
             holder.tvCount.text="$count"
-            onCountChange!!.onMinusClicked(products[position].id!!,count)
+            onCountChange!!.onMinusClicked(products[position].productRef,count)
         }
         holder.itemView.setOnLongClickListener {
             onCountChange!!.onItemLongClicked(position)

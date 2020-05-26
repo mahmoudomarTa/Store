@@ -11,7 +11,10 @@ import com.example.store.Constants
 
 import com.example.store.R
 import com.example.store.adapters.CartAdapter
-import com.example.store.model.Product
+import com.example.store.model.Sale
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.android.synthetic.main.fragment_cart.view.*
 import java.util.*
 
@@ -34,42 +37,37 @@ class CartFragment : Fragment() {
             "May", "June", "July", "Augest", "September", "October", "November", "December")
 
         view.tvDate.text="$day / ${months[month]} / $year"
-        var products = ArrayList<Product>()
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"","red","",false,1.0,1.0))
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
+        var salesList = ArrayList<Sale>()
         view.rvItemsInCart.layoutManager=LinearLayoutManager(context)
-        var cartAdapter = CartAdapter(context,products,object:CartAdapter.OnCountChange{
-            override fun onPlusClicked(id:String, count: Int) {
-                Toast.makeText(context, Constants.map.size.toString(),Toast.LENGTH_LONG).show()
-                Constants.map.put(id,count)
+
+        FirebaseFirestore.getInstance().collection("sales").addSnapshotListener() { values , e ->
+
+            for (sale in values!!.toObjects<Sale>()) {
+                if (sale.userId == FirebaseAuth.getInstance().currentUser!!.uid) {
+                    salesList.add(sale)
+                }
             }
 
-            override fun onMinusClicked(id:String, count: Int) {
-                Toast.makeText(context, Constants.map.size.toString(),Toast.LENGTH_LONG).show()
-                Constants.map.put(id,count)
+                var cartAdapter = CartAdapter(context,salesList,object:CartAdapter.OnCountChange{
+                    override fun onPlusClicked(id:String, count: Int) {
+                        Toast.makeText(context, Constants.map.size.toString(),Toast.LENGTH_LONG).show()
+                        Constants.map.put(id,count)
+                    }
+
+                    override fun onMinusClicked(id:String, count: Int) {
+                        Toast.makeText(context, Constants.map.size.toString(),Toast.LENGTH_LONG).show()
+                        Constants.map.put(id,count)
+                    }
+
+                    override fun onItemLongClicked(position: Int) {
+                        Toast.makeText(context,position.toString(),Toast.LENGTH_LONG).show()
+                    }
+                } )
+                view.rvItemsInCart.adapter=cartAdapter
+
             }
 
-            override fun onItemLongClicked(position: Int) {
-                Toast.makeText(context,position.toString(),Toast.LENGTH_LONG).show()
-            }
-        } )
-        view.rvItemsInCart.adapter=cartAdapter
+
 
 
         return view
