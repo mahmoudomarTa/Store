@@ -18,6 +18,7 @@ import com.example.store.adapters.ColorsAdapter
 import com.example.store.adapters.HomeAdapter.OnProductClickListener
 import com.example.store.adapters.ProductAdapter
 import com.example.store.model.Product
+import com.example.store.model.Sale
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
@@ -75,7 +77,17 @@ class SecondActivity : AppCompatActivity() {
                 //TODO: Fill the rest of the UI Data.
                 // loadMap(product.lat, product.long)
                 addToCartBtn.setOnClickListener {
-
+                    val sale = Sale(
+                        FirebaseAuth.getInstance().currentUser!!.uid,
+                        product.name,
+                        documentRef,
+                        FirebaseAuth.getInstance().currentUser!!.displayName!!
+                    )
+                    FirebaseFirestore.getInstance().collection("sales").document("S${(0..10000).random()}").set(sale)
+                        .addOnSuccessListener {
+                            Toast.makeText(this@SecondActivity, "Success!", Toast.LENGTH_SHORT).show()
+                            this@SecondActivity.finish()
+                        }
                 }
             }
     }

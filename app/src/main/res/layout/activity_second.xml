@@ -127,7 +127,7 @@
             android:id="@+id/addToCartBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/addToCart"
+            android:text="Buy"
             android:background="#FFEB3B"
             android:textColor="#716F71"
             app:layout_constraintBottom_toBottomOf="parent"
