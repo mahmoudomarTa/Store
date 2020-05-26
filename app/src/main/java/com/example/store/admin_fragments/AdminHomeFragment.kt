@@ -89,6 +89,7 @@ class AdminHomeFragment : Fragment() {
                     }
 
                     override fun onDeleteImgClicked(category: Category) {
+                        FirebaseFirestore.getInstance().collection("categories").document(category.id).delete()
                     }
                 })
             rv_admin_home.adapter = adapter

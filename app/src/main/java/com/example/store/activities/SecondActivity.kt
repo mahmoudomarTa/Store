@@ -74,6 +74,9 @@ class SecondActivity : AppCompatActivity() {
                 tvItemName.text = product!!.name
                 //TODO: Fill the rest of the UI Data.
                 // loadMap(product.lat, product.long)
+                addToCartBtn.setOnClickListener {
+
+                }
             }
     }
 
