@@ -35,7 +35,7 @@
         android:id="@+id/pbAdminProducts"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

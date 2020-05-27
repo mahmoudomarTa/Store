@@ -23,6 +23,8 @@ import com.example.store.model.Category
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
+import kotlinx.android.synthetic.main.fragment_admin_home.*
+import kotlinx.android.synthetic.main.fragment_admin_home.view.*
 import java.util.Random
 
 /**
@@ -36,9 +38,8 @@ class AdminHomeFragment : Fragment() {
         var rv_admin_home = view.findViewById<RecyclerView>(R.id.rv_admin_home)
         var btnAddCategory = view.findViewById<FloatingActionButton>(R.id.btnAddCategory)
         rv_admin_home.layoutManager = LinearLayoutManager(context)
-        btnAddCategory.setOnClickListener {
 
-        }
+
         // TODO : load data and make peogress bar visibility gone
 
         FirebaseFirestore.getInstance().collection("categories").addSnapshotListener { value, e ->
@@ -92,6 +93,7 @@ class AdminHomeFragment : Fragment() {
                     }
                 })
             rv_admin_home.adapter = adapter
+            view.pbAdminHome.visibility=View.GONE
 
         }
 

@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog.Builder
@@ -54,7 +55,7 @@ class ProductsActivity : AppCompatActivity() {
                             })
 
                     rv_admin_products.adapter = adapter
-
+                    pbAdminProducts.visibility= View.GONE
                 }
             btnAddproduct.setOnClickListener {
                 val i = Intent(applicationContext, EditAndAddProductActivity::class.java)
