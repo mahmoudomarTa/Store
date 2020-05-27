@@ -48,4 +48,5 @@
     <string name="iDontHaveAccount">"Idont have account "</string>
     <string name="allreadyHaveAccount">Allready Have Account</string>
     <string name="mobileShouldBe">mobile should be more than 8 char</string>
+    <string name="success">success!</string>
 </resources>

@@ -4,9 +4,11 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog.Builder
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.store.Constants
@@ -48,8 +50,10 @@ class ProductsActivity : AppCompatActivity() {
                                 }
 
                                 override fun onDeleteClicked(product: Product) {
-                                    FirebaseFirestore.getInstance().collection("categories/$categoryId/products/").document(product.id).delete()
-
+                                    FirebaseFirestore.getInstance().collection("categories/$categoryId/products/").document(product.id).delete().addOnFailureListener{e->
+                                        Toast.makeText(applicationContext,"error ${e.message}",Toast.LENGTH_LONG).show()
+                                        Log.d("ttt","${e.message}")
+                                    }
                                 }
                             })
 

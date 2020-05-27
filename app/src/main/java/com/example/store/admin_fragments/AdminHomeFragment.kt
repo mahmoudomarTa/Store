@@ -44,7 +44,7 @@ class AdminHomeFragment : Fragment() {
 
         FirebaseFirestore.getInstance().collection("categories").addSnapshotListener { value, e ->
             val adapter = AdminHomeAdapter(
-                context!!,
+                activity!!,
                 value!!.toObjects(),
                 object : AdminHomeAdapter.OnCategoryItemClickListener {
                     override fun onItemClicked(category: Category) {

@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.store.Constants
 import com.example.store.R
 import com.example.store.adapters.ColorsAdapter
@@ -33,6 +34,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.android.synthetic.main.activity_dealer_brand_offers.rv
 import kotlinx.android.synthetic.main.activity_second.*
+import kotlin.Result.Companion.success
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var mMap: GoogleMap
@@ -48,24 +50,6 @@ class SecondActivity : AppCompatActivity() {
         if (intent != null) {
             val productRef = intent.getStringExtra("productRef")
             loadProduct(productRef)
-            //Toast.makeText(this,id,Toast.LENGTH_LONG).show()
-
-            var linerLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            rvColors.layoutManager = linerLayoutManager
-            var colors = arrayOf(
-                Color.CYAN, Color.BLACK,
-                Color.DKGRAY, Color.GREEN,
-                Color.LTGRAY, Color.MAGENTA,
-                Color.YELLOW, Color.RED,
-                Color.GRAY
-            );
-            var colorsAdapter = ColorsAdapter(this, colors, object : ColorsAdapter.OnColorSelected {
-                override fun onColorSelect(color: Int) {
-                }
-            })
-            rvColors.adapter = colorsAdapter
-
-            //view.imgAboutItem
         }
     }
 
@@ -74,9 +58,14 @@ class SecondActivity : AppCompatActivity() {
             .addSnapshotListener() { value, e ->
                 val product = value!!.toObject<Product>()
                 tvItemName.text = product!!.name
-                //TODO: Fill the rest of the UI Data.
-                // loadMap(product.lat, product.long)
+                ratingBar.rating=product.rate.toFloat()
+                tvProductDescription.text=product.description
+                tvProductPrice.text=product.price
+                Glide.with(this).load(product.img).into(imgAboutItem)
+                loadMap(LatLng(product.lat,product.long))
+                ppAboutProduct.visibility=View.GONE
                 addToCartBtn.setOnClickListener {
+                    ppAboutProduct.visibility=View.VISIBLE
                     val sale = Sale(
                         FirebaseAuth.getInstance().currentUser!!.uid,
                         product.name,
@@ -85,7 +74,7 @@ class SecondActivity : AppCompatActivity() {
                     )
                     FirebaseFirestore.getInstance().collection("sales").document("S${(0..10000).random()}").set(sale)
                         .addOnSuccessListener {
-                            Toast.makeText(this@SecondActivity, "Success!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@SecondActivity, getString(R.string.success), Toast.LENGTH_SHORT).show()
                             this@SecondActivity.finish()
                         }
                 }
@@ -102,23 +91,21 @@ class SecondActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 MY_PERMISSIONS_REQUEST_READ_CONTACTS
             )
-        } else {
-            loadMap()
         }
     }
 
-    private fun loadMap() {
+    private fun loadMap(latlang:LatLng) {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync {
             mMap = it
-            val product = LatLng(31.506731, 34.461367)
+            //val product = LatLng(31.506731, 34.461367)
             val markerOptions = MarkerOptions()
-            markerOptions.position(product)
+            markerOptions.position(latlang)
             markerOptions.title("mahmoud tabaza home")
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.delivery))
             mMap.addMarker(markerOptions)
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(product, 10f))
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 10f))
 
             var locationClient = LocationServices.getFusedLocationProviderClient(this)
             locationClient.lastLocation.addOnSuccessListener { location ->
@@ -128,7 +115,7 @@ class SecondActivity : AppCompatActivity() {
                     mMap.addMarker(
                         MarkerOptions().position(LatLng(lat, long)).title(getString(R.string.yourLocation))
                     )
-                    mMap.addPolyline(PolylineOptions().add(LatLng(lat, long), product).color(Color.RED).visible(true))
+                    mMap.addPolyline(PolylineOptions().add(LatLng(lat, long), latlang).color(Color.RED).visible(true))
                 }
             }.addOnFailureListener { exception ->
                 Toast.makeText(this, exception.message, Toast.LENGTH_LONG).show()
