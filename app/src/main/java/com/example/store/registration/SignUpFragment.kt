@@ -74,25 +74,29 @@ class SignUpFragment : Fragment() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity!!) { task ->
                     if (task.isSuccessful) {
-                        var user = mapOf<String, String>(
-                            auth.currentUser!!.uid to "id",
-                            email to "email",
-                            mobile to "mobile",
-                            password to "password"
+                        var user = mapOf(
+                            "id" to auth.currentUser!!.uid,
+                            "email" to email,
+                            "mobile" to mobile,
+                            "password" to password
                         )
-                        firestore.collection("users").add(user!!).addOnSuccessListener {
-                            ppSignUp.visibility = View.GONE
-                            var intent = Intent(activity!!, UserHomeActivity::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
-                            startActivity(intent)
-                            activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit()
-                                .putBoolean(Constants.IS_FIRST_OPEN, false).apply()
-                            activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit()
-                                .putBoolean(Constants.IS_USER, true).apply()
-                            activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE).edit()
-                                .putString(Constants.ID, auth.currentUser!!.uid).apply()
+                        firestore.collection("users").document(auth.currentUser!!.uid).set(user)
+                            .addOnSuccessListener {
+                                ppSignUp.visibility = View.GONE
+                                var intent = Intent(activity!!, UserHomeActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
+                                startActivity(intent)
+                                activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+                                    .edit()
+                                    .putBoolean(Constants.IS_FIRST_OPEN, false).apply()
+                                activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+                                    .edit()
+                                    .putBoolean(Constants.IS_USER, true).apply()
+                                activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+                                    .edit()
+                                    .putString(Constants.ID, auth.currentUser!!.uid).apply()
 
-                        }.addOnFailureListener {
+                            }.addOnFailureListener {
                             ppSignUp.visibility = View.GONE
                             Toast.makeText(context, "Authentication failed.", Toast.LENGTH_LONG).show()
                         }

@@ -40,7 +40,6 @@ class CategoryFragment : Fragment() {
                     intent.putExtra(Constants.DBO, Constants.DEALER)
                     intent.putExtra("categoryId",categoryId)
                     startActivity(intent)
-
                 }
             })
             view.rvCategory.adapter=categoriesAdapter

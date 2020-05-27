@@ -48,9 +48,8 @@ class ProductsActivity : AppCompatActivity() {
                                 }
 
                                 override fun onDeleteClicked(product: Product) {
-                                    var intent = Intent(applicationContext, EditAndAddProductActivity::class.java)
-                                    intent.putExtra("id", product.id)
-                                    startActivity(intent)
+                                    FirebaseFirestore.getInstance().collection("categories/$categoryId/products/").document(product.id).delete()
+
                                 }
                             })
 

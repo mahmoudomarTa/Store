@@ -32,11 +32,17 @@ class AdminHomeAdapter(var context: Context,var data:List<Category>,var onCatego
         holder.imgDeleteCategory.setOnClickListener {
             onCategoryItemClickListener.onDeleteImgClicked(data[position])
         }
+
+        holder.imgEdit.setOnClickListener {
+            onCategoryItemClickListener.onItemLongClicked(data[position])
+        }
     }
 
     class AdminHomeViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         var tvCategoryName = itemView.tvCategoryName
-        var imgDeleteCategory=itemView.imgDeleteCategory
+        var imgDeleteCategory = itemView.imgDeleteCategory
+        var imgEdit=itemView.imgEdit
+
     }
     interface OnCategoryItemClickListener{
         fun onItemClicked(category: Category)
