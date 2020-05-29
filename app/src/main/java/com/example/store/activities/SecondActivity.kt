@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -15,9 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.store.Constants
 import com.example.store.R
+import com.example.store.adapters.AdminProductsAdapter
 import com.example.store.adapters.ColorsAdapter
 import com.example.store.adapters.HomeAdapter.OnProductClickListener
 import com.example.store.adapters.ProductAdapter
+import com.example.store.model.Category
 import com.example.store.model.Product
 import com.example.store.model.Sale
 import com.google.android.gms.location.LocationServices
@@ -33,6 +36,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.android.synthetic.main.activity_dealer_brand_offers.rv
+import kotlinx.android.synthetic.main.activity_products.pbAdminProducts
+import kotlinx.android.synthetic.main.activity_products.rv_admin_products
 import kotlinx.android.synthetic.main.activity_second.*
 import kotlin.Result.Companion.success
 
@@ -58,14 +63,14 @@ class SecondActivity : AppCompatActivity() {
             .addSnapshotListener() { value, e ->
                 val product = value!!.toObject<Product>()
                 tvItemName.text = product!!.name
-                ratingBar.rating=product.rate.toFloat()
-                tvProductDescription.text=product.description
-                tvProductPrice.text=product.price
+                ratingBar.rating = product.rate.toFloat()
+                tvProductDescription.text = product.description
+                tvProductPrice.text = product.price
                 Glide.with(this).load(product.img).into(imgAboutItem)
-                loadMap(LatLng(product.lat,product.long))
-                ppAboutProduct.visibility=View.GONE
+                loadMap(LatLng(product.lat, product.long))
+                ppAboutProduct.visibility = View.GONE
                 addToCartBtn.setOnClickListener {
-                    ppAboutProduct.visibility=View.VISIBLE
+                    ppAboutProduct.visibility = View.VISIBLE
                     val sale = Sale(
                         FirebaseAuth.getInstance().currentUser!!.uid,
                         product.name,
@@ -74,7 +79,8 @@ class SecondActivity : AppCompatActivity() {
                     )
                     FirebaseFirestore.getInstance().collection("sales").document("S${(0..10000).random()}").set(sale)
                         .addOnSuccessListener {
-                            Toast.makeText(this@SecondActivity, getString(R.string.success), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@SecondActivity, getString(R.string.success), Toast.LENGTH_SHORT)
+                                .show()
                             this@SecondActivity.finish()
                         }
                 }
@@ -82,6 +88,23 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun requestThePermission() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
@@ -94,7 +117,7 @@ class SecondActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadMap(latlang:LatLng) {
+    private fun loadMap(latlang: LatLng) {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync {

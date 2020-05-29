@@ -10,6 +10,7 @@ import com.example.store.R
 import com.example.store.adapters.HomeAdapter.OnProductClickListener
 import com.example.store.model.Brand
 import com.example.store.model.Product
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_second.imgAboutItem
 import kotlinx.android.synthetic.main.brand_layout.view.*
 import kotlinx.android.synthetic.main.item_product.view.name
@@ -33,6 +34,7 @@ class ProductAdapter(
     override fun onBindViewHolder(holder: BrandViewHolder, position: Int) {
         holder.rbBrand.name.text = products[position].name.toString()
         Glide.with(holder.itemView.context).load(products[position].img).into(holder.img)
+
 
         holder.itemView.setOnClickListener {
             onProductClickListener.onItemClicked(products[position].id)
