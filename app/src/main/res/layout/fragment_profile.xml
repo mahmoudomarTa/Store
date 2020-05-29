@@ -251,61 +251,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clMobile2" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clAddress"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:background="#fff"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1.0"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/signOutBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14">
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/address"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Replace This Text View With Google Map that uses lastLocation"
-            android:textColor="#000"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView12"
-            app:layout_constraintVertical_bias="0.0" />
-
-
-        <View
+        <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/map3"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="1sp"
-            android:background="#EFEFEF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/signOutBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:text="@string/signOut"
         android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clAddress" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

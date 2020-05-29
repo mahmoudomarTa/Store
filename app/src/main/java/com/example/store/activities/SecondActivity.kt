@@ -125,7 +125,7 @@ class SecondActivity : AppCompatActivity() {
             //val product = LatLng(31.506731, 34.461367)
             val markerOptions = MarkerOptions()
             markerOptions.position(latlang)
-            markerOptions.title("mahmoud tabaza home")
+            markerOptions.title("location")
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.delivery))
             mMap.addMarker(markerOptions)
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 13f))

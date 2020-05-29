@@ -1,7 +1,10 @@
 package com.example.store.user_fragments
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.store.Constants
 import com.example.store.Constants.Companion.IS_FIRST_OPEN
@@ -21,6 +26,14 @@ import com.example.store.adapters.AdminProductsAdapter.OnProductClickListener
 import com.example.store.dialogs_Fragments.UpdateFragment
 import com.example.store.model.Product
 import com.example.store.registration.RegesterationActivity
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
@@ -38,6 +51,7 @@ import kotlinx.android.synthetic.main.fragment_profile.view.*
  * A simple [Fragment] subclass.
  */
 class ProfileFragment : Fragment() {
+    private lateinit var mMap: GoogleMap
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,16 +105,28 @@ class ProfileFragment : Fragment() {
                 tvMobile.text = user.mobile
                 userId.text = user.id
 
-                //TODO ADD MAP CODE HERE
-//                user.lat
-//                user.long
-
-
+             //   loadMap(user.lat,user.long)
+                val mapFragment = activity!!.supportFragmentManager
+                    .findFragmentById(R.id.map3) as SupportMapFragment
+                mapFragment.getMapAsync {
+                    mMap = it
+                    MarkerOptions().position(LatLng(user.lat,user.long)).title(getString(R.string.yourLocation))
+                }
             }
 
 
 
 
         return view
+    }
+
+
+    private fun loadMap(lat:Double , long:Double) {
+        val mapFragment = activity!!.supportFragmentManager
+            .findFragmentById(R.id.map3) as SupportMapFragment
+        mapFragment.getMapAsync {
+            mMap = it
+            MarkerOptions().position(LatLng(lat, long)).title(getString(R.string.yourLocation))
+        }
     }
 }
