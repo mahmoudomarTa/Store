@@ -29,10 +29,11 @@ class EditAndAddProductActivity : AppCompatActivity() {
                     val product = documentSnapshot!!.toObject<Product>()
                     edProductName.setText(product!!.name)
                     edDescription.setText(product.description)
-                    edPrice.setText(product.price.toString())
-                    edRate.setText(product.rate.toString())
+                    edPrice.setText(product.price)
+                    edRate.setText(product.rate)
                     edLong.setText(product.long.toString())
                     edLat.setText(product.lat.toString())
+                    imgProduct.setText(product.img)
                     btnSaveProduct.setOnClickListener {
                         product.name = edProductName.text.toString()
                         product.description = edDescription.text.toString()
@@ -40,8 +41,10 @@ class EditAndAddProductActivity : AppCompatActivity() {
                         product.rate = edRate.text.toString()
                         product.long = edLong.text.toString().toDouble()
                         product.lat = edLat.text.toString().toDouble()
+                        product.img = imgProduct.text.toString()
 
-                        FirebaseFirestore.getInstance().document("${product.category}/products/${product.id}").set(product).addOnSuccessListener {
+                        FirebaseFirestore.getInstance().document("${product.category}/products/${product.id}")
+                            .set(product).addOnSuccessListener {
                             Log.d("ttt", "cool")
                         }
 
@@ -58,9 +61,10 @@ class EditAndAddProductActivity : AppCompatActivity() {
                 var rate = edRate.text.toString()
                 var long = edLong.text.toString().toDouble()
                 var lat = edLat.text.toString().toDouble()
+                var img = imgProduct.text.toString()
 
                 var product =
-                    Product(id, name, description, price, rate, "www.google.com/logo", categoryRef, lat, long)
+                    Product(id, name, description, price, rate, img, categoryRef, lat, long)
 
                 FirebaseFirestore.getInstance().collection("$categoryRef/products").document(product.id).set(product)
 
