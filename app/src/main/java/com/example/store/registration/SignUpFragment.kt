@@ -14,6 +14,7 @@ import com.example.store.Constants
 import com.example.store.R
 import com.example.store.activities.AdminHomeActivity
 import com.example.store.activities.UserHomeActivity
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -74,31 +75,47 @@ class SignUpFragment : Fragment() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity!!) { task ->
                     if (task.isSuccessful) {
-                        var user = mapOf(
-                            "id" to auth.currentUser!!.uid,
-                            "email" to email,
-                            "mobile" to mobile,
-                            "password" to password
-                        )
-                        firestore.collection("users").document(auth.currentUser!!.uid).set(user)
-                            .addOnSuccessListener {
-                                ppSignUp.visibility = View.GONE
-                                var intent = Intent(activity!!, UserHomeActivity::class.java)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
-                                startActivity(intent)
-                                activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
-                                    .edit()
-                                    .putBoolean(Constants.IS_FIRST_OPEN, false).apply()
-                                activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
-                                    .edit()
-                                    .putBoolean(Constants.IS_USER, true).apply()
-                                activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
-                                    .edit()
-                                    .putString(Constants.ID, auth.currentUser!!.uid).apply()
+                        var long = 0.0
+                        var lat = 0.0
+                        var locationClient = LocationServices.getFusedLocationProviderClient(context!!)
+                        locationClient.lastLocation.addOnSuccessListener { location ->
+                            if (location != null) {
+                                long = location.longitude
+                                lat = location.latitude
+                            } else {
+                                lat = 31.5018499
+                                long = 34.453096
+                            }
 
-                            }.addOnFailureListener {
-                            ppSignUp.visibility = View.GONE
-                            Toast.makeText(context, "Authentication failed.", Toast.LENGTH_LONG).show()
+                            var user = mapOf(
+                                "id" to auth.currentUser!!.uid,
+                                "email" to email,
+                                "mobile" to mobile,
+                                "password" to password,
+                                "long" to long,
+                                "lat" to lat
+
+                            )
+                            firestore.collection("users").document(auth.currentUser!!.uid).set(user)
+                                .addOnSuccessListener {
+                                    ppSignUp.visibility = View.GONE
+                                    var intent = Intent(activity!!, UserHomeActivity::class.java)
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
+                                    startActivity(intent)
+                                    activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+                                        .edit()
+                                        .putBoolean(Constants.IS_FIRST_OPEN, false).apply()
+                                    activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+                                        .edit()
+                                        .putBoolean(Constants.IS_USER, true).apply()
+                                    activity!!.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+                                        .edit()
+                                        .putString(Constants.ID, auth.currentUser!!.uid).apply()
+
+                                }.addOnFailureListener {
+                                    ppSignUp.visibility = View.GONE
+                                    Toast.makeText(context, "Authentication failed.", Toast.LENGTH_LONG).show()
+                                }
                         }
                     } else {
                         ppSignUp.visibility = View.GONE

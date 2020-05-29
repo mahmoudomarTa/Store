@@ -91,6 +91,11 @@ class ProfileFragment : Fragment() {
                 tvMobile.text = user.mobile
                 userId.text = user.id
 
+                //TODO ADD MAP CODE HERE
+//                user.lat
+//                user.long
+
+
             }
 
 

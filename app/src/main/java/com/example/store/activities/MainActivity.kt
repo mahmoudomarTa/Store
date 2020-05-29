@@ -2,14 +2,20 @@ package com.example.store.activities
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.widget.Toast
 import com.example.store.Constants.Companion.IS_FIRST_OPEN
 import com.example.store.Constants.Companion.IS_USER
 import com.example.store.Constants.Companion.SHARED_PREF_NAME
 import com.example.store.R
 import com.example.store.registration.RegesterationActivity
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +42,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         },1500)
+
+
+
 
 
 
