@@ -104,8 +104,7 @@ class ProfileFragment : Fragment() {
                 tvEmail.text = user.email
                 tvMobile.text = user.mobile
                 userId.text = user.id
-
-             //   loadMap(user.lat,user.long)
+                // edit activity!!.supportFragmentManager here
                 val mapFragment = activity!!.supportFragmentManager
                     .findFragmentById(R.id.map3) as SupportMapFragment
                 mapFragment.getMapAsync {

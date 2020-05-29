@@ -31,23 +31,6 @@ class MainActivity : AppCompatActivity() {
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        FirebaseFirestore.getInstance().collection("categories")
-            .addSnapshotListener { value, e ->
-                val x = value!!.toObjects<Category>()
-                Log.d("ttt", x.toString())
-
-                x.forEach {
-                    FirebaseFirestore.getInstance().collection("categories/${it.id}/products")
-                        .addSnapshotListener { values, e ->
-
-                            val productList = values!!.toObjects<Product>()
-
-                            productList.forEach { product ->
-                                Log.d("ttt", product.toString())
-                            }
-                        }
-                }
-            }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
