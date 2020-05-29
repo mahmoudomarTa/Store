@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#3498DB"
     android:layout_height="match_parent"
-    android:background="#ff0"
     tools:context=".activities.MainActivity">
 
-    <TextView
+    <ImageView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="splash screen "
-        android:textColor="#f00"
+        android:src="@drawable/splash"
+        android:textColor="#3498DB"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
