@@ -12,4 +12,10 @@
         android:id="@+id/topRatedFragment"
         android:icon="@drawable/ic_star"
         android:title="top rated" />
+
+    <item
+        android:id="@+id/logoutFragment"
+        android:icon="@drawable/ic_exit"
+        android:title="Logout" />
+
 </menu>

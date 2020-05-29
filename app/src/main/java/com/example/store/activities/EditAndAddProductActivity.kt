@@ -45,8 +45,8 @@ class EditAndAddProductActivity : AppCompatActivity() {
 
                         FirebaseFirestore.getInstance().document("${product.category}/products/${product.id}")
                             .set(product).addOnSuccessListener {
-                            Log.d("ttt", "cool")
-                        }
+                                Log.d("ttt", "cool")
+                            }
 
                     }
 
@@ -67,6 +67,10 @@ class EditAndAddProductActivity : AppCompatActivity() {
                     Product(id, name, description, price, rate, img, categoryRef, lat, long)
 
                 FirebaseFirestore.getInstance().collection("$categoryRef/products").document(product.id).set(product)
+                    .addOnCompleteListener {
+                        Toast.makeText(this@EditAndAddProductActivity, "DONE", Toast.LENGTH_SHORT).show()
+                        this@EditAndAddProductActivity.finish()
+                    }
 
             }
         }

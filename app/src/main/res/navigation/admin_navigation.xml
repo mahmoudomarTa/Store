@@ -20,4 +20,10 @@
         android:name="com.example.store.admin_fragments.TopRatedFragment"
         android:label="fragment_top_rated"
         tools:layout="@layout/fragment_top_rated" />
+
+    <fragment
+        android:id="@+id/logoutFragment"
+        android:name="com.example.store.admin_fragments.LogoutFragment"
+        android:label="fragment_log_out"
+        tools:layout="@layout/fragment_log_out" />
 </navigation>
