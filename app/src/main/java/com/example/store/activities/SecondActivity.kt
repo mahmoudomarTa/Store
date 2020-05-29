@@ -70,7 +70,7 @@ class SecondActivity : AppCompatActivity() {
                         FirebaseAuth.getInstance().currentUser!!.uid,
                         product.name,
                         documentRef,
-                        FirebaseAuth.getInstance().currentUser!!.displayName!!
+                        FirebaseAuth.getInstance().currentUser!!.email!!
                     )
                     FirebaseFirestore.getInstance().collection("sales").document("S${(0..10000).random()}").set(sale)
                         .addOnSuccessListener {
@@ -105,7 +105,7 @@ class SecondActivity : AppCompatActivity() {
             markerOptions.title("mahmoud tabaza home")
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.delivery))
             mMap.addMarker(markerOptions)
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 10f))
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 13f))
 
             var locationClient = LocationServices.getFusedLocationProviderClient(this)
             locationClient.lastLocation.addOnSuccessListener { location ->
