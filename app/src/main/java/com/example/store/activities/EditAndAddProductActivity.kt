@@ -54,7 +54,7 @@ class EditAndAddProductActivity : AppCompatActivity() {
         } else {
             val categoryRef = intent.getStringExtra("categoryRef")
             btnSaveProduct.setOnClickListener {
-                var id = "P" + (0..100000).random()
+                var id = "P${(0..100000).random()}"
                 var name = edProductName.text.toString()
                 var description = edDescription.text.toString()
                 var price = edPrice.text.toString()

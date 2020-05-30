@@ -32,18 +32,19 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: BrandViewHolder, position: Int) {
-        holder.rbBrand.name.text = products[position].name.toString()
+        holder.rbBrand.rating = products[position].rate.toFloat()
         Glide.with(holder.itemView.context).load(products[position].img).into(holder.img)
 
 
         holder.itemView.setOnClickListener {
-            onProductClickListener.onItemClicked(products[position].id)
+            onProductClickListener.onItemClicked(products[position].id,position)
         }
     }
 
     class BrandViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var rbBrand = itemView.name
+        var rbBrand = itemView.rbBrand
         var img = itemView.imgBrand
+
     }
 
     interface OnProductClickListener {

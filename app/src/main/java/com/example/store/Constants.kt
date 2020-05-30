@@ -18,10 +18,7 @@ class Constants {
         fun printToast(context: Context?, text:String){
             Toast.makeText(context,text, Toast.LENGTH_SHORT).show()
         }
-        fun getTimeInMILS():Long{
-            var c = Calendar.getInstance()
-            return c.timeInMillis
-        }
+
         var map = HashMap<String,Int>()
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.store.R
 import com.example.store.model.Product
 import kotlinx.android.synthetic.main.item_in_home_rv.view.*
@@ -24,9 +25,9 @@ class HomeAdapter(var context: Context?, var products:List<Product>,var onProduc
         holder.tvPriceInHome.text=products[position].name
         holder.tvRate.text=products[position].rate.toString()
         holder.itemView.setOnClickListener {
-            onProductClickListener.onItemClicked(products[position].id!!)
+            onProductClickListener.onItemClicked(products[position].id!!,position)
         }
-        //Glide.with(holder.imgItemInHome).load(products[position].photos[0]).into(holder.imgItemInHome)
+        Glide.with(holder.imgItemInHome).load(products[position].img).into(holder.imgItemInHome)
     }
 
     inner class HomeAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,6 +36,6 @@ class HomeAdapter(var context: Context?, var products:List<Product>,var onProduc
         var tvRate = itemView.tvRate
     }
     interface OnProductClickListener{
-        fun onItemClicked(id:String);
+        fun onItemClicked(id:String,position: Int);
     }
 }

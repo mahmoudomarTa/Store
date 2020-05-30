@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.store.Constants
 
@@ -23,6 +25,7 @@ import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.item_product.*
 
 /**
  * A simple [Fragment] subclass.
@@ -61,41 +64,37 @@ class HomeFragment : Fragment() {
         view.imageSlider2.setScrollTimeInSec(4);
 
 
-        var products = ArrayList<Product>()
-//        products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"","red","",false,1.0,1.0))
-//            products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//            products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//            products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//            products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//            products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//            products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//            products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
-//            products.add(Product("1","hello","hello world!!",55.71,3.4,50.0,
-//            Constants.getTimeInMILS(),"ArrayList<String>()","red","",false,1.0,1.0))
 
 
         FirebaseFirestore.getInstance().collection("categories")
             .addSnapshotListener { value, e ->
                 val x = value!!.toObjects<Category>()
-                Log.d("ttt", x.toString())
-
                 x.forEach {
                     FirebaseFirestore.getInstance().collection("categories/${it.id}/products")
                         .addSnapshotListener { values, e ->
 
                             val productList = values!!.toObjects<Product>()
+                            var names = ArrayList<String>()
+                            productList.forEach{
+                                names.add(it.name)
+                            }
+
+                            view.edSearchAtv.setAdapter(ArrayAdapter(context!!,android.R.layout.simple_list_item_1,names))
+
+
+                            view.edSearchAtv.setOnItemClickListener { parent, view, position, id ->
+                                var i = Intent(context,SecondActivity::class.java)
+                                i.putExtra("productRef","${productList[position].category}/products/${productList[position].id}")
+                                startActivity(i)
+                            }
+
+
                             view.rvHome.adapter=HomeAdapter(context,productList,object :HomeAdapter.OnProductClickListener{
-                                override fun onItemClicked(id: String) {
+                                override fun onItemClicked(id: String,position:Int) {
+                                    Toast.makeText(context!!,"$id",Toast.LENGTH_LONG).show()
+                                    Log.d("ttt","$id")
                                     var i = Intent(context,SecondActivity::class.java)
-                                    i.putExtra(Constants.ID,id)
+                                    i.putExtra("productRef","${productList[position].category}/products/${productList[position].id}")
                                     startActivity(i)
                                 }
                             })

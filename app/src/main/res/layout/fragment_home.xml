@@ -30,8 +30,8 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <EditText
-                android:id="@+id/edSearch"
+            <AutoCompleteTextView
+                android:id="@+id/edSearchAtv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -51,9 +51,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:src="@drawable/ic_search"
-                app:layout_constraintBottom_toBottomOf="@+id/edSearch"
+                app:layout_constraintBottom_toBottomOf="@+id/edSearchAtv"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/edSearch" />
+                app:layout_constraintTop_toTopOf="@+id/edSearchAtv" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -63,7 +63,7 @@
                 app:cardCornerRadius="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edSearch">
+                app:layout_constraintTop_toBottomOf="@+id/edSearchAtv">
 
                 <com.smarteist.autoimageslider.SliderView
                     android:id="@+id/imageSlider"

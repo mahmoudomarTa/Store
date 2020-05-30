@@ -104,13 +104,21 @@ class ProfileFragment : Fragment() {
                 tvEmail.text = user.email
                 tvMobile.text = user.mobile
                 userId.text = user.id
-                // edit activity!!.supportFragmentManager here
-                val mapFragment = activity!!.supportFragmentManager
-                    .findFragmentById(R.id.map3) as SupportMapFragment
+
+                val mapFragment= getChildFragmentManager().findFragmentById(R.id.map3) as SupportMapFragment
                 mapFragment.getMapAsync {
                     mMap = it
-                    MarkerOptions().position(LatLng(user.lat,user.long)).title(getString(R.string.yourLocation))
+                   // MarkerOptions().position(LatLng(user.lat,user.long)).title(getString(R.string.yourLocation))
+                    //MarkerOptions().position(LatLng(1.0,12.0)).title(getString(R.string.yourLocation))
+                    var markerOptions = MarkerOptions()
+                    markerOptions.position(LatLng(user.lat,user.long))
+                    markerOptions.title(getString(R.string.yourLocation))
+                    mMap.addMarker(markerOptions)
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(user.lat,user.long), 13f))
+
+
                 }
+               // loadMap(user.lat,user.long)
             }
 
 
@@ -121,8 +129,9 @@ class ProfileFragment : Fragment() {
 
 
     private fun loadMap(lat:Double , long:Double) {
-        val mapFragment = activity!!.supportFragmentManager
-            .findFragmentById(R.id.map3) as SupportMapFragment
+        val mapFragment= getChildFragmentManager().findFragmentById(R.id.map3) as SupportMapFragment
+//        val mapFragment = activity!!.supportFragmentManager
+//            .findFragmentById(R.id.map3) as SupportMapFragment
         mapFragment.getMapAsync {
             mMap = it
             MarkerOptions().position(LatLng(lat, long)).title(getString(R.string.yourLocation))

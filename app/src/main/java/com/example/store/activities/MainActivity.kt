@@ -28,15 +28,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        var IS_FIRST_OPEN =
-            getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE).getBoolean(IS_FIRST_OPEN, true)
+        var IS_FIRST_OPEN = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE).getBoolean(IS_FIRST_OPEN, true)
         var IS_USER = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE).getBoolean(IS_USER, true)
         Handler().postDelayed(Runnable {
             if (IS_FIRST_OPEN) {

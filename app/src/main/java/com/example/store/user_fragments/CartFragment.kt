@@ -50,17 +50,17 @@ class CartFragment : Fragment() {
 
                 var cartAdapter = CartAdapter(context,salesList,object:CartAdapter.OnCountChange{
                     override fun onPlusClicked(id:String, count: Int) {
-                        Toast.makeText(context, Constants.map.size.toString(),Toast.LENGTH_LONG).show()
-                        Constants.map.put(id,count)
+//                        Toast.makeText(context, Constants.map.size.toString(),Toast.LENGTH_LONG).show()
+//                        Constants.map.put(id,count)
                     }
 
                     override fun onMinusClicked(id:String, count: Int) {
-                        Toast.makeText(context, Constants.map.size.toString(),Toast.LENGTH_LONG).show()
-                        Constants.map.put(id,count)
+                      //  Toast.makeText(context, Constants.map.size.toString(),Toast.LENGTH_LONG).show()
+                      //  Constants.map.put(id,count)
                     }
 
                     override fun onItemLongClicked(position: Int) {
-                        Toast.makeText(context,position.toString(),Toast.LENGTH_LONG).show()
+//                        Toast.makeText(context,position.toString(),Toast.LENGTH_LONG).show()
                     }
                 } )
                 view.rvItemsInCart.adapter=cartAdapter

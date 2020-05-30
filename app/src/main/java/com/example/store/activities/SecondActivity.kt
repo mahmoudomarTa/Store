@@ -54,7 +54,7 @@ class SecondActivity : AppCompatActivity() {
 
         if (intent != null) {
             val productRef = intent.getStringExtra("productRef")
-            loadProduct(productRef)
+            loadProduct(productRef!!)
         }
     }
 
@@ -76,6 +76,8 @@ class SecondActivity : AppCompatActivity() {
                         product.name,
                         documentRef,
                         FirebaseAuth.getInstance().currentUser!!.email!!
+                        ,product.img
+                        ,product.price
                     )
                     FirebaseFirestore.getInstance().collection("sales").document("S${(0..10000).random()}").set(sale)
                         .addOnSuccessListener {
@@ -88,22 +90,6 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun requestThePermission() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -125,7 +111,7 @@ class SecondActivity : AppCompatActivity() {
             //val product = LatLng(31.506731, 34.461367)
             val markerOptions = MarkerOptions()
             markerOptions.position(latlang)
-            markerOptions.title("location")
+            markerOptions.title("product")
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.delivery))
             mMap.addMarker(markerOptions)
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 13f))

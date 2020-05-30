@@ -67,7 +67,7 @@ class AdminHomeFragment : Fragment() {
                         //set padding in parent layout
                         layout.setPaddingRelative(45, 15, 45, 0)
 
-                        alert.setTitle("Add New Category")
+                        alert.setTitle("edit Category")
 
                         layout.addView(edittext)
 
@@ -90,7 +90,13 @@ class AdminHomeFragment : Fragment() {
                     }
 
                     override fun onDeleteImgClicked(category: Category) {
-                    }
+//                        FirebaseFirestore.getInstance().collection("categories/").document(category.name).delete().addOnFailureListener { e ->
+//                        Toast.makeText(activity!!,e.message,Toast.LENGTH_LONG).show()
+//                        }.addOnSuccessListener {
+//
+//                        }
+
+                        }
                 })
             rv_admin_home.adapter = adapter
             view.pbAdminHome.visibility=View.GONE

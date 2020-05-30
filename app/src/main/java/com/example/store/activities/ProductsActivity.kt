@@ -40,6 +40,7 @@ class ProductsActivity : AppCompatActivity() {
                             value!!.toObjects(),
                             object : AdminProductsAdapter.OnProductClickListener {
                                 override fun onProductClicked(product: Product) {
+                                    // not used
                                 }
 
                                 override fun onEditClicked(product: Product) {

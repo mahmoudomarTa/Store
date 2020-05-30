@@ -38,14 +38,14 @@ class DealerBrandOffersActivity : AppCompatActivity() {
                         this@DealerBrandOffersActivity,
                         value!!.toObjects(),
                         object : OnProductClickListener {
-                            override fun onItemClicked(id: String) {
+                            override fun onItemClicked(id: String, position: Int) {
                                 var i = Intent(this@DealerBrandOffersActivity, SecondActivity::class.java)
                                 i.putExtra("productRef", "categories/${categoryId}/products/${id}")
                                 startActivity(i)
                             }
                         })
                     rv.adapter = categoriesAdapter
-                    rv.layoutManager = GridLayoutManager(this@DealerBrandOffersActivity, 3)
+                    rv.layoutManager = GridLayoutManager(this@DealerBrandOffersActivity, 2)
 
                 }
         } else {
