@@ -40,15 +40,15 @@ class HomeFragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_home, container, false)
         var ids:IntArray = intArrayOf(
             R.drawable.f1, R.drawable.f2, R.drawable.f3,
-            R.drawable.f4, R.drawable.f5, R.drawable.f6,
-            R.drawable.f7
+            R.drawable.f4, R.drawable.f5, R.drawable.f6
+
         )
 
 
         var ids2:IntArray = intArrayOf(
-            R.drawable.f1, R.drawable.f2, R.drawable.f3,
+
             R.drawable.f4, R.drawable.f5, R.drawable.f6,
-            R.drawable.f7
+                    R.drawable.f1, R.drawable.f2, R.drawable.f3
         )
 
         view.imageSlider.sliderAdapter=SliderAdapter(ids)
@@ -105,23 +105,6 @@ class HomeFragment : Fragment() {
                 }
             }
 
-
-
-        view.clDealer.setOnClickListener {
-            val i = Intent(context,DealerBrandOffersActivity::class.java)
-            i.putExtra(Constants.DBO,Constants.DEALER)
-            startActivity(i)
-        }
-        view.clBrand.setOnClickListener {
-            val i = Intent(context,DealerBrandOffersActivity::class.java)
-            i.putExtra(Constants.DBO,Constants.BRAND)
-            startActivity(i)
-        }
-        view.clOffers .setOnClickListener {
-            val i = Intent(context,DealerBrandOffersActivity::class.java)
-            i.putExtra(Constants.DBO,Constants.OFFERS)
-            startActivity(i)
-        }
 
 
 
